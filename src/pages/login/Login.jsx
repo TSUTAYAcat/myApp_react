@@ -2,11 +2,13 @@ import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
-import './Login.less'
+import './Login.less';
+import { login } from '../service/login'
 
 export default class Login extends React.Component {
-    onFinish = values => {
-        console.log(values)
+    onFinish = async values => {
+        let result = await login(values)
+        console.log(result)
     }
     onFinishFailed = values => {
         alert('你要是没有用户名密码我给你提供一个，看当前页面右下角')
@@ -45,7 +47,7 @@ export default class Login extends React.Component {
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">
-                             前进
+                            前进
                          </Button>
                     </Form.Item>
                 </Form>
