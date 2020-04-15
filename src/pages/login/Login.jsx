@@ -6,7 +6,7 @@ import localInfo from '../../utils/localUtils'
 import { Redirect } from 'react-router-dom'
 
 import './Login.less';
-import { login } from '../service/login'
+import { login } from '../../service/login'
 
 export default class Login extends React.Component {
 
