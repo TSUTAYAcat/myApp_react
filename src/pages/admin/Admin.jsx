@@ -17,7 +17,7 @@ const { Header, Footer, Sider, Content } = Layout;
 export default class Admin extends React.Component {
 
     render() {
-        console.log(userInfo)
+        console.log(this)
         if (!(userInfo && userInfo.user && Object.keys(userInfo.user).length > 0)) {
             return <Redirect to="/login/" />
         }
