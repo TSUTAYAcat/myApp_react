@@ -4,24 +4,38 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import userInfo from '../../utils/infoUtils'
 import localInfo from '../../utils/localUtils'
 import { Redirect } from 'react-router-dom'
-
+import md5 from 'blueimp-md5'
 import './Login.less';
-import { login } from '../../service/login'
+import { login, regist } from '../../service/login'
 
 export default class Login extends React.Component {
-
     onFinish = async values => {
-        let result = await login(values)
-        if (result.data && result.data.data && result.data.data.loginSuccess) {
-            console.log(this.props.history)
-            userInfo.user = values
-            localInfo.saveUser(values)
-            this.props.history.replace('/admin')
+        console.log(values)
+        if (values.isRegist) {
+            let { username, password } = values
+            password = md5(password)
+            let result = await regist({ username, password })
+            console.log(result)
+            if (result.data && result.data.success) {
+                console.log(result)
+            }
+        } else {
+            let { username, password } = values
+            password = md5(password)
+            let result = await login({ username, password })
+            if (result.data && result.data.data && result.data.data.loginSuccess) {
+                console.log(this.props.history)
+                userInfo.user = result.data.data
+                localInfo.saveUser(result.data.data)
+                this.props.history.replace('/admin')
+            }
         }
+
     }
     onFinishFailed = values => {
         alert('你要是没有用户名密码我给你提供一个，看当前页面右下角')
     }
+
     render() {
         if (userInfo && userInfo.user && Object.keys(userInfo.user).length > 0) {
             return <Redirect to="/admin" />
@@ -60,8 +74,8 @@ export default class Login extends React.Component {
                             placeholder="还有你的密码，谢谢！"
                         />
                     </Form.Item>
-                    <Form.Item name="remember" valuePropName="checked">
-                        <Checkbox>记住 我</Checkbox>
+                    <Form.Item name="isRegist" valuePropName="checked">
+                        <Checkbox >注册？</Checkbox>
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">

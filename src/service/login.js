@@ -1,5 +1,5 @@
 import request from '../utils/request';
-
+// 登录
 const login = (values) => {
     return  request({
         method: 'get',
@@ -10,7 +10,19 @@ const login = (values) => {
         }
     })
 }
+// 注册
+const regist = (values) => {
+    return  request({
+        method: 'post',
+        url: `user/register/joinUs`,
+        data: {
+            username: values.username,
+            password: values.password
+        }
+    })
+}
 
 export {
     login,
+    regist,
 }

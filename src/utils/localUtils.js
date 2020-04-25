@@ -4,10 +4,10 @@ export default {
     saveUser(user) {
         store.set(USER, user)
     },
-    getUser(user) {
+    getUser() {
         return store.get(USER) ||{}
     },
-    removeUser(user) {
+    removeUser() {
         store.remove(USER)
     }
 }

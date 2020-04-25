@@ -1,17 +1,18 @@
 import React from 'react'
-import {
-    PieChartOutlined,
-    MailOutlined,
-} from '@ant-design/icons';
+import { PieChartOutlined, MailOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
 import menuList from '../../config/menu'
+import md5 from 'blueimp-md5'
+
 const { SubMenu } = Menu
 
 class LeftNav extends React.Component {
     componentWillMount() {
+        console.log(md5('asd'))
         this.navList = this.renderMenu(menuList)
     }
+    // 渲染左侧导航栏
     renderMenu = (menuList, newMenuList = []) => {
         const pathname = this.props.location.pathname
         menuList.forEach(value => {

@@ -4,6 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd';
 
 import LeftNav from '../../components/left-nav/LeftNav'
+import HeaderAdmin from '../../components/header/Header'
 import Category from '../category/Category'
 import Home from '../home/Home'
 import Product from '../product/Product'
@@ -27,7 +28,9 @@ export default class Admin extends React.Component {
                     <LeftNav />
                 </Sider>
                 <Layout>
-                    <Header style={{ backgroundColor: "#fff" }}>Header</Header>
+                    <Header style={{ backgroundColor: "#fff", padding: 0, height: '100px', lineHeight: 0 }}>
+                        <HeaderAdmin />
+                    </Header>
                     <Content>
                         <Switch>
                             <Redirect exact={true} from='/admin' to='/admin/home'></Redirect>
