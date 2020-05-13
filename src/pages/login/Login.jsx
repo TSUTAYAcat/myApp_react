@@ -15,18 +15,19 @@ export default class Login extends React.Component {
             let { username, password } = values
             password = md5(password)
             let result = await regist({ username, password })
-            console.log(result)
-            if (result.data && result.data.success) {
+            console.log(result,111)
+            if (result && result.data&&result.data.success) {
                 console.log(result)
             }
         } else {
             let { username, password } = values
             password = md5(password)
             let result = await login({ username, password })
-            if (result.data && result.data.data && result.data.data.loginSuccess) {
+            console.log(result)
+            if (result && result.data&&result.data.success) {
                 console.log(this.props.history)
-                userInfo.user = result.data.data
-                localInfo.saveUser(result.data.data)
+                userInfo.user = result.data
+                localInfo.saveUser(result.data)
                 this.props.history.replace('/admin')
             }
         }

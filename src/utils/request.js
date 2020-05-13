@@ -8,12 +8,13 @@ export default function request(param) {
         url: param.url || '',
         data: param.method === 'post' ? param.data : null,
         params: param.method === 'get' ? param.data : null,
-        baseURL: 'http://144.34.190.73:3000/',
+        baseURL: 'http://localhost:3000/',
         timeout: 10000,
     }).then(res => {
-        if (res && res.data && res.data.success) {
-            return res.data.data
+        console.log('初始：',res)
+        if (res) {
+            return res
         }
         return null
-    }).catch(error => { console.log(error); return { success: false } })
+    }).catch(error => { console.log(error); return null })
 }

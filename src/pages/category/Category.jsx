@@ -39,10 +39,13 @@ export default class Category extends React.Component {
     }
     setCategoryList = (level = 1, parent_id = 0) => {
         getCategoryList({ level: level, parent_id: parent_id }).then(e => {
+            if(e&&e.data&&e.data.success){
+                this.setState({
+                    list: e.data.data || []
+                })
+            }
             console.log(e)
-            this.setState({
-                list: e || []
-            })
+          
         })
     }
     render() {
